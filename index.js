@@ -91,7 +91,7 @@ function writeToFile(fileName, data) {
 
   ## Contribution
 
-  ${data.contribution}
+  ${data.contribute}
 
   ## License
     
@@ -104,7 +104,8 @@ function writeToFile(fileName, data) {
   ## Questions
 
   If you have any questions, I can be contacted via the following links: 
- [Github](https://www.github.com/${data.github}) [Email](mailto: ${data.email})
+ [Github](https://www.github.com/${data.github})  
+ [Email](mailto: ${data.email})
     
     `, 
     (error) => {if(error) console.log(error)}
@@ -113,7 +114,7 @@ function writeToFile(fileName, data) {
 function init() {
   inquirer.prompt(questions)
     .then(responses => {
-    writeToFile("README.md", responses)
+    writeToFile("BuiltREADME.md", responses)
     })
 }
 
