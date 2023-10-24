@@ -52,11 +52,22 @@ const questions = [
   }
 ];
 
+const licenseBadges = {
+  "MIT": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+  "Apache": "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
+  "GPLv2": "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)",
+  "GPLv3": "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)",
+  "BSD 3-clause": "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)",
+  "Unlicensed": "This project is unlicensed."
+}
+
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
+  let badge = `${data.license}`;
   fs.writeFile(fileName, 
     `# ${data.title}
 
+  ${licenseBadges[badge]}
   ## Description
 
   ${data.description}
@@ -68,7 +79,7 @@ function writeToFile(fileName, data) {
   - [Contribution](#contribution)
   - [License](#license)
   - [Testing](#testing)
-  - [Contact](#contact)
+  - [Contact](#questions)
 
   ## Installation
 
@@ -90,18 +101,16 @@ function writeToFile(fileName, data) {
 
   ${data.testing}
 
-  ## Contact 
+  ## Questions
 
   If you have any questions, I can be contacted via the following links: 
  [Github](https://www.github.com/${data.github}) [Email](mailto: ${data.email})
     
     `, 
-    (error) => console.log(error))
-}
-
+    (error) => {if(error) console.log(error)}
+  )}
 // TODO: Create a function to initialize app
 function init() {
-  console.log("Please enter all responses in quotation marks")
   inquirer.prompt(questions)
     .then(responses => {
     writeToFile("README.md", responses)
