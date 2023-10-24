@@ -53,10 +53,60 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, 
+    `# ${data.title}
+
+  ## Description
+
+  ${data.description}
+    
+  ## Table of Contents
+
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contribution](#contribution)
+  - [License](#license)
+  - [Testing](#testing)
+  - [Contact](#contact)
+
+  ## Installation
+
+  ${data.installation}
+
+  ## Usage
+
+  ${data.usage}
+
+  ## Contribution
+
+  ${data.contribution}
+
+  ## License
+    
+  This project utilizes the ${data.license} license. 
+
+  ## Testing
+
+  ${data.testing}
+
+  ## Contact 
+
+  If you have any questions, I can be contacted via the following links: 
+ [Github](https://www.github.com/${data.github}) [Email](mailto: ${data.email})
+    
+    `, 
+    (error) => console.log(error))
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  console.log("Please enter all responses in quotation marks")
+  inquirer.prompt(questions)
+    .then(responses => {
+    writeToFile("README.md", responses)
+    })
+}
 
 // Function call to initialize app
 init();
